@@ -43,6 +43,8 @@
   </div>
 
   <script>
+    //This debounce function is so that we aren't running the scroll function constantly and slowing down the performance. This way, the internal function only runs on the timeout
+    //It's good to add a debounce to scroll events so it doesn't go crazy
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -58,6 +60,21 @@
       };
     }
 
+    const sliderImages= document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      // console.count(e);
+      sliderImages.forEach(slideImage => {
+        //halfway thru the image
+        const slideInAt = (window.scrollY + window.innerHeight) - slideImage.height / 2;
+        console.log(slideInAt);
+        //bottom of the image
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+      })
+
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide));
   </script>
 
   <style>
